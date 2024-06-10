@@ -1,0 +1,82 @@
+@font-face {
+    font-family: tubaba-regular;
+    src: url(/assets/tubaba-fonts/Tubaba-Regular.ttf);
+}
+
+@font-face {
+    font-family: tubaba-bold;
+    src: url(/assets/tubaba-fonts/Tubaba-Bold.ttf);
+}
+
+
+.edit-sidebar{
+    background-color: maroon;
+}
+
+.edit-sidebar .brand-text{
+    color:  rgb(204, 162, 106);
+}
+
+.nav-header {
+    color:  rgb(204, 162, 106);
+}
+
+.edit-sidebar .brand-text:hover{
+    color: black;
+}
+
+.nav-item {
+    p{
+        color:  rgb(204, 162, 106);
+    }
+
+    i{
+        color:  rgb(204, 162, 106);
+    }
+}
+
+.nav-item a:hover{
+    p{
+        color: black;
+    }
+
+    i{
+        color: black;
+    }
+}
+
+
+.body {
+    font-family: tubaba-regular;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+}
+.main-footer {
+    font-family: tubaba-regular;
+}
+
+.h5 {
+    font-family: tubaba-bold;
+}
+
+.span {
+    font-family: tubaba-bold;
+}
+
+.li{
+    font-family: tubaba-bold;
+}
+
+.login-page{
+    background-color: maroon;
+}
+.hold-transition {
+    background-color: whitesmoke;
+}
+.style-tr {
+  text-align: center;
+}
+
+

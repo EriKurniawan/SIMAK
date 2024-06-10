@@ -1,0 +1,69 @@
+@font-face {
+    font-family: tubaba-regular;
+    src: url("/assets/tubaba-fonts/Tubaba-Regular.ttf");
+}
+@font-face {
+    font-family: tubaba-bold;
+    src: url("/assets/tubaba-fonts/Tubaba-Bold.ttf");
+}
+
+body {
+    font-family: tubaba-regular;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 80px;
+}
+
+.kop-surat {
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-text {
+    text-align: center;
+}
+
+.kop-surat .logo {
+    width: 100px;
+    height: auto;
+}
+
+.kop-surat .header-text h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.kop-surat .header-text p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.catatan {
+    text-align: left;
+}
+.ttd {
+    text-align: right;
+}
+.letter-spacing-example {
+    letter-spacing: 6px; /* Menambahkan jarak antar huruf */
+    text-align: center;
+    margin-bottom: 15px;
+}
