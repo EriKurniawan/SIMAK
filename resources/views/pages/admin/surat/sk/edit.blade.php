@@ -34,10 +34,10 @@
                                     <label for="tujuan">Tujuan Surat</label>
                                     <input type="text" name="tujuan" class="form-control" id="tujuan" placeholder="" value="{{ $data->tujuan }}">
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="nomor">No Surat</label>
                                     <input type="text" name="nomor_surat" class="form-control" id="nomor" placeholder=""value="{{ $data->nomor_surat }}">
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label>Tanggal Surat</label>
                                     <div class="input-group date" id="reservationdate" data-target-input="nearest">

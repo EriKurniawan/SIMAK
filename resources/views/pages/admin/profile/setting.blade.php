@@ -28,7 +28,7 @@
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->foto ? asset(Auth::user()->foto) : '/assets/img/user.png' }}" alt="User profile picture">
                                 </div>
-                                <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+                                <h3 class="profile-username text-center">{{ Auth::user()->username }}</h3>
                                 <p class="text-muted text-center">{{ Auth::user()->level }}</p>
                             </div>
                             <!-- /.card-body -->
@@ -40,8 +40,8 @@
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="/profile/profile">Profile {{ Auth::user()->level }}</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="/profile/setting">Pengaturan</a></li>
+                                    <li class="nav-item"><a class="nav-link {{ request()->is('profile/profile*') ? 'active' : '' }}" href="/profile/profile">Profile {{ Auth::user()->level }}</a></li>
+                                    <li class="nav-item"><a class="nav-link {{ request()->is('profile/setting*') ? 'active' : '' }}" href="/profile/setting?id={{ Auth::id() }}">Pengaturan</a></li>
                                 </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -51,9 +51,9 @@
                                     <form action="/profile/update" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group row">
-                                            <label for="inputnip" class="col-sm-2 col-form-label">ID</label>
+                                            <label for="id" class="col-sm-2 col-form-label">ID</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="id" class="form-control" id="inputnip" value="{{ Auth::user()->id }}">
+                                                <input type="text" name="id" class="form-control" id="id" value="{{ Auth::user()->id }}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -63,9 +63,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+                                            <label for="inputnama" class="col-sm-2 col-form-label">Username</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="name" class="form-control" id="inputnama" value="{{ Auth::user()->name }}">
+                                                <input type="text" name="username" class="form-control" id="inputnama" value="{{ Auth::user()->username }}">
                                             </div>
                                         </div>
                                         <div class="form-group row">

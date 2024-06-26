@@ -13,18 +13,40 @@ class RegisterController extends Controller
         return view('pages.admin.login.register');
     }
 
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required',
-        ]);
+        $id = $request->id;
+        $username = $request->username;
+        $email = $request->email;
+        $password = $request->password;
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
 
-        User::create($validatedData);
+        // Hash password menggunakan bcrypt
+        $hashedPassword = Hash::make($password);
 
-        return redirect('/login')->with('success', 'User created successfully!');
+        $data = [
+
+            'username' => $username,
+            'email' => $email,
+            'password' => $hashedPassword, // Menggunakan password yang telah di-hash
+
+        ];
+
+        User::where('id', $id)->update($data);
+
+        return redirect('/login')->with(['success' => 'Data Berhasil Disimpan']);
     }
+    // {
+    //     $validatedData = $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|unique:users',
+    //         'password' => 'required',
+    //     ]);
+
+    //     $validatedData['password'] = Hash::make($validatedData['password']);
+
+    //     User::create($validatedData);
+
+    //     return redirect('/login')->with('success', 'User created successfully!');
+    // }
 }

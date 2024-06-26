@@ -104,10 +104,8 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
-                                                            {{-- <a class="dropdown-item" href="/surat/disposisi/index">Disposisikan</a> --}}
-                                                            {{-- <a class="dropdown-item" href="/app/public/file-surat">Unduh</a> --}}
-                                                            <a class="dropdown-item" href="/surat/disposisi/show?id={{ $data->id }}">Lihat</a>
-                                                            @if (auth()->user()->level == 'admin')
+                                                            <a class="dropdown-item" href="/surat/disposisi/show?id={{ $data->id }}">Detail</a>
+                                                            @if (auth()->user()->level == 'admin' || auth()->user()->level == 'pimpinan' || auth()->user()->level == 'operator')
                                                                 <a class="dropdown-item" href="/surat/disposisi/edit?id={{ $data->id }}">Edit</a>
                                                                 <a class="dropdown-item" data-toggle="modal" data-target="#modal-default">Hapus</a>
                                                             @endif

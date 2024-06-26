@@ -91,34 +91,37 @@
                     <!-- /.info-box -->
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-10">
-                    <form action="/surat/sk/search" method="GET">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label for="dari_tanggal">Dari Tanggal</label>
-                                <input type="date" class="form-control" name="dari_tanggal" id="dari_tanggal">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="sampai_tanggal">Sampai Tanggal</label>
-                                <input type="date" class="form-control" name="sampai_tanggal" id="sampai_tanggal">
-                            </div>
 
-                            <div class="col-md-0 d-flex align-items-end justify-content-end">
-                                <button type="submit" class="btn btn-primary mr-2">Cari</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <div style="text-align: right">
-                                    <a class="btn btn-primary" href="/surat/sk/create" role="button">Tambah Data</a>
+                                <div class="row mb-3">
+                                    <div class="col-md-7">
+                                        <form action="/surat/sk/search" method="GET">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label for="dari_tanggal">Dari Tanggal</label>
+                                                    <input type="date" class="form-control" name="dari_tanggal" id="dari_tanggal">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="sampai_tanggal">Sampai Tanggal</label>
+                                                    <input type="date" class="form-control" name="sampai_tanggal" id="sampai_tanggal">
+                                                </div>
+                                                <div class="col-md-3 align-self-end">
+                                                    <button type="submit" class="btn btn-primary mr-2">Cari</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div style="text-align: right">
+                                            <a class="btn btn-primary" href="/surat/sk/create" role="button">Tambah Data</a>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -160,8 +163,11 @@
                                                             @if (auth()->user()->level == 'admin' || auth()->user()->level == 'operator' || auth()->user()->level == 'staf' || auth()->user()->level == 'pimpinan')
                                                                 <a class="dropdown-item" href="/surat/sk/show?id={{ $data->id }}">Detail</a>
                                                             @endif
-                                                            @if (auth()->user()->level == 'admin' || auth()->user()->level == 'operator' || auth()->user()->level == 'staf')
+                                                            @if (auth()->user()->level == 'admin' || auth()->user()->level == 'operator' || auth()->user()->level == 'staf' || auth()->user()->level == 'pimpinan')
                                                                 <a class="dropdown-item" href="/surat/sk/edit?id={{ $data->id }}">Edit</a>
+                                                                <a class="dropdown-item" href="/surat/sk/upload?id={{ $data->id }}">Upload Surat</a>
+                                                            @endif
+                                                            @if (auth()->user()->level == 'admin' || auth()->user()->level == 'operator' || auth()->user()->level == 'staf')
                                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-delete-{{ $data->id }}">Hapus</a>
                                                             @endif
                                                         </div>

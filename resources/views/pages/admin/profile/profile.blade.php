@@ -28,7 +28,7 @@
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->foto ? asset(Auth::user()->foto) : '/assets/img/user.png' }}" alt="User profile picture">
                                 </div>
-                                <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+                                <h3 class="profile-username text-center">{{ Auth::user()->username }}</h3>
                                 <p class="text-muted text-center">{{ Auth::user()->level }}</p>
                             </div>
                             <!-- /.card-body -->
@@ -40,10 +40,8 @@
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="/profile/profile">Profile {{ Auth::user()->level }}</a></li>
-
-                                    <li class="nav-item"><a class="nav-link" href="/profile/setting?id={{ Auth::id() }}">Pengaturan</a></li>
-
+                                    <li class="nav-item"><a class="nav-link {{ request()->is('profile/profile*') ? 'active' : '' }}" href="/profile/profile">Profile {{ Auth::user()->level }}</a></li>
+                                    <li class="nav-item"><a class="nav-link {{ request()->is('profile/setting*') ? 'active' : '' }}" href="/profile/setting?id={{ Auth::id() }}">Pengaturan</a></li>
 
                                 </ul>
                             </div><!-- /.card-header -->
@@ -55,9 +53,9 @@
                                             <dt class="col-sm-0">:</dt>
                                             <dd class="col-sm-7">{{ Auth::user()->nip }}</dd>
 
-                                            <dt class="col-sm-4">Nama</dt>
+                                            <dt class="col-sm-4">Username</dt>
                                             <dt class="col-sm-0">:</dt>
-                                            <dd class="col-sm-7">{{ Auth::user()->nama }}</dd>
+                                            <dd class="col-sm-7">{{ Auth::user()->username }}</dd>
 
                                             <dt class="col-sm-4">Jabatan</dt>
                                             <dt class="col-sm-0">:</dt>

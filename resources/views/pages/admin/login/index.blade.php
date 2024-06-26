@@ -28,7 +28,7 @@
             </div>
             <div class="card-body">
 
-                <p class="login-box-msg"><b>SIMAK</b> <br>Silahkan Login!</p>
+                <p class="login-box-msg"><b>SISTEM INFORMASI <br> SURAT MASUK & KELUAR</b> <br>Silahkan Masuk!</p>
 
 
                 <form action="/login" method="post">
@@ -36,7 +36,7 @@
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control @error('email') is-invalid
 
-                        @enderror" id="email" placeholder="Username" autofocus required value="{{ old('email') }}">
+                        @enderror" id="email" placeholder="Email" autofocus required value="{{ old('email') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -49,28 +49,28 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" id="email" placeholder="Password" required>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
-                    <p class="mb-1">
-                        <a href="/login/index">Forgot Password?</a>
-                    </p>
+                    {{-- <p class="mb-1">
+                        <a href="/login/index?id={{ Auth::id() }}">Lupa Password?</a>
+                    </p> --}}
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember">
                                 <label for="remember">
-                                    Remember Me
+                                    Ingat Saya
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
                         </div>
                         <!-- /.col -->
                     </div>

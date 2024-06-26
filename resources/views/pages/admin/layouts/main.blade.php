@@ -26,7 +26,7 @@
 
     <!-- jQuery -->
     @include('pages.admin.layouts.script')
-
+    @stack('script')
 </body>
 
 </html>

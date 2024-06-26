@@ -26,7 +26,7 @@ Route::post('/login', [loginController::class, 'authenticate']);
 Route::get('/logout', [loginController::class, 'logout']);
 Route::prefix("login")->group(function () {
     Route::get('/index', [RegisterController::class, 'index']);
-    Route::post('/store', [RegisterController::class, 'store']);
+    Route::post('/update', [RegisterController::class, 'update']);
 });
 
 Route::get('/', [PageController::class, 'index'])->middleware(['auth']);
@@ -62,12 +62,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get("/index", [TransaksiSuratKeluarController::class, "index"]);
             Route::get("/show", [TransaksiSuratKeluarController::class, "show"]);
             Route::get("/create", [TransaksiSuratKeluarController::class, "create"]);
+            Route::get("/create/kategori", [TransaksiSuratKeluarController::class, "create_kategori"]);
             Route::post("/store", [TransaksiSuratKeluarController::class, "store"]);
             Route::get("/edit", [TransaksiSuratKeluarController::class, "edit"]);
             Route::post("/update", [TransaksiSuratKeluarController::class, "update"]);
             Route::delete("/destroy", [TransaksiSuratKeluarController::class, "destroy"]);
             Route::get("/download", [TransaksiSuratKeluarController::class, "download"]);
             Route::get("/search", [TransaksiSuratKeluarController::class, "search"]);
+            Route::get("/upload", [TransaksiSuratKeluarController::class, "upload"]);
+            Route::post("/upload/file", [TransaksiSuratKeluarController::class, "upload_file"]);
         });
         Route::prefix("disposisi")->group(function () {
             Route::get("/index", [DispositionController::class, "index"]);

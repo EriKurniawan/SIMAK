@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("tanggal_surat");
             $table->string("keterangan");
             $table->string("perihal");
-            $table->string("lampiran");
+            $table->string("lampiran")->nullable();
             $table->timestamps();
         });
     }

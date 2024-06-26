@@ -27,8 +27,6 @@ class DispositionController extends Controller
         return view("pages.admin.surat.disposisi.create", ['data' => $data]);
     }
 
-
-
     public function show(Request $request)
     {
         $id = $request->id;
@@ -80,7 +78,6 @@ class DispositionController extends Controller
         }
     }
 
-
     public function edit(Request $request)
     {
         $id = $request->id;
@@ -96,11 +93,11 @@ class DispositionController extends Controller
         $nomor_surat = $request->nomor_surat;
         $tanggal_surat = $request->tanggal_surat;
         $tanggal_diterima = $request->tanggal_diterima;
-        $nomor_agenda = $request->nomor_agenda;
-        $sifat_surat = $request->sifat_surat ? '1' : '0'; // Convert boolean to string
+        $nomor_agenda = $request->has('nomor_agenda') ? $request->nomor_agenda : null;
+        $sifat_surat = $request->sifat_surat; // Convert boolean to string
         $perihal = $request->perihal;
-        $diteruskan = $request->diteruskan ? '1' : '0'; // Convert boolean to string
-        $hormat = $request->hormat ? '1' : '0'; // Convert boolean to string
+        $diteruskan = $request->diteruskan; // Convert boolean to string
+        $hormat = $request->hormat; // Convert boolean to string
         $catatan = $request->catatan;
 
         $data = [
@@ -108,7 +105,6 @@ class DispositionController extends Controller
             'nomor_surat' => $nomor_surat,
             'tanggal_surat' => $tanggal_surat,
             'tanggal_diterima' => $tanggal_diterima,
-            'nomor_agenda' => $nomor_agenda,
             'sifat_surat' => $sifat_surat,
             'perihal' => $perihal,
             'diteruskan' => $diteruskan,
@@ -116,16 +112,21 @@ class DispositionController extends Controller
             'catatan' => $catatan
         ];
 
-        Disposition::where('id', $id)->update($data);
+        // Add 'nomor_agenda' to the data array only if it's set
+        if ($nomor_agenda !== null) {
+            $data['nomor_agenda'] = $nomor_agenda;
+        }
 
-        $dataBerhasilDisimpan = true; // Ganti dengan logika penyimpanan yang sesuai
+        // dd($data);
+        $updateSuccess = Disposition::where('id', $id)->update($data);
 
-        if ($dataBerhasilDisimpan) {
+        if ($updateSuccess) {
             return redirect('/surat/disposisi/index')->with('status', 'Data Berhasil Di Perbarui');
         } else {
             return redirect('/surat/disposisi/index')->with('error', 'Data Gagal Di Perbarui');
         }
     }
+
 
 
     public function destroy(Request $request)

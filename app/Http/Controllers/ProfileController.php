@@ -37,20 +37,31 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
-        $nip = $request->nip;
-        $name = $request->name;
-        $jabatan = $request->jabatan;
-        $email = $request->email;
-        $password = $request->password;
+
+        // Ambil data user berdasarkan ID
+        $user = User::find($id);
+
+        // Ambil nilai yang diubah dari request
+        $nip = $request->nip ?: $user->nip; // Jika tidak ada perubahan, gunakan nilai dari user sebelumnya
+        $username = $request->username ?: $user->username;
+        $jabatan = $request->jabatan ?: $user->jabatan;
+        $email = $request->email ?: $user->email;
+        $password = $request->password ?: $user->password; // Perhatikan, biasanya password tidak boleh disimpan dalam plaintext, jadi mungkin perlu logika tambahan
 
         // Cek apakah ada file foto yang diunggah
         if ($request->hasFile('foto')) {
+            // Hapus foto yang ada jika ingin diganti
+            if ($user->foto) {
+                Storage::delete($user->foto); // Hapus foto dari storage
+            }
+
             // Simpan file ke dalam direktori 'public/img/'
             $foto = $request->file('foto')->move(public_path('img'), $request->file('foto')->getClientOriginalName());
             // Ambil path relatif dari file
             $fotoPath = 'img/' . $request->file('foto')->getClientOriginalName();
         } else {
-            $fotoPath = null; // Atau atur foto menjadi null jika tidak ada file yang diunggah
+
+            $fotoPath = $user->foto; // Gunakan foto yang sudah ada jika tidak ada perubahan
         }
 
         // Hash password menggunakan bcrypt
@@ -58,10 +69,10 @@ class ProfileController extends Controller
 
         $data = [
             'nip' => $nip,
-            'name' => $name,
+            'username' => $username,
             'jabatan' => $jabatan,
             'email' => $email,
-            'password' => $hashedPassword, // Menggunakan password yang telah di-hash
+            // 'password' => $hashedPassword, // Menggunakan password yang telah di-hash
             'foto' => $fotoPath
         ];
 

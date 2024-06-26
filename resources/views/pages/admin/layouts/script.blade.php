@@ -1,15 +1,13 @@
 <!-- Link ke Bootstrap JS dan dependensi Popper.js -->
-
-<!-- jQuery -->
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 <!-- ChartJS -->
 <script src="/assets/plugins/chart.js/Chart.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="/assets/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-{{-- <script src="/assets/js/demo.js"></script> --}}
+
 <!-- DataTables  & Plugins -->
 <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -23,248 +21,196 @@
 <script src="/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 <!-- Select2 -->
 <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
+
 <!-- Bootstrap4 Duallistbox -->
 <script src="/assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-<!-- InputMask -->
+
+<!-- Moment.js -->
 <script src="/assets/plugins/moment/moment.min.js"></script>
+
+<!-- InputMask -->
 <script src="/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- date-range-picker -->
+
+<!-- DateRangePicker -->
 <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap color picker -->
+
+<!-- Bootstrap Colorpicker -->
 <script src="/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
 <!-- Bootstrap Switch -->
 <script src="/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
 <!-- BS-Stepper -->
 <script src="/assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- dropzonejs -->
+
+<!-- Dropzone -->
 <script src="/assets/plugins/dropzone/min/dropzone.min.js"></script>
 
+<!-- Flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <!-- Page specific script -->
 <script>
     $(function() {
-        //Initialize Select2 Elements
-        $('.select2').select2()
-
-        //Initialize Select2 Elements
+        // Initialize Select2 Elements
+        $('.select2').select2();
         $('.select2bs4').select2({
             theme: 'bootstrap4'
-        })
-
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', {
-            'placeholder': 'dd/mm/yyyy'
-        })
-        //Datemask2 mm/dd/yyyy
-        $('#datemask2').inputmask('mm/dd/yyyy', {
-            'placeholder': 'mm/dd/yyyy'
-        })
-        //Money Euro
-        $('[data-mask]').inputmask()
-
-        //Date picker (ini yang digunakan)
-        $('#reservationdate').datetimepicker({
-            format: 'DD-MM-YYYY'
         });
-        $('#reservationdate1').datetimepicker({
+
+        // Initialize Input Masks
+        $('[data-mask]').inputmask();
+
+        // Date pickers using datetimepicker
+        $('#reservationdate, #reservationdate1').datetimepicker({
             format: 'DD-MM-YYYY'
         });
 
-        //Date and time picker
+        // DateTime picker using datetimepicker
         $('#reservationdatetime').datetimepicker({
             icons: {
                 time: 'far fa-clock'
             }
         });
 
-        //Date range picker
-        $('#reservation').daterangepicker()
-        //Date range picker with time picker
-        $('#reservationtime').daterangepicker({
+        // Date range pickers using daterangepicker
+        $('#reservation, #reservationtime').daterangepicker({
             timePicker: true,
             timePickerIncrement: 30,
             locale: {
                 format: 'MM/DD/YYYY hh:mm A'
             }
-        })
-        //Date range as a button
-        $('#daterange-btn').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
-            },
-            function(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-            }
-        )
+        });
 
-        //Timepicker
+        // Date range picker with presets using daterangepicker
+        $('#daterange-btn').daterangepicker({
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
+        }, function(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        });
+
+        // Timepicker using datetimepicker
         $('#timepicker').datetimepicker({
             format: 'LT'
-        })
+        });
 
-        //Bootstrap Duallistbox
-        $('.duallistbox').bootstrapDualListbox()
+        // Bootstrap Duallistbox
+        $('.duallistbox').bootstrapDualListbox();
 
-        //Colorpicker
-        $('.my-colorpicker1').colorpicker()
-        //color picker with addon
-        $('.my-colorpicker2').colorpicker()
+        // Colorpicker
+        $('.my-colorpicker1, .my-colorpicker2').colorpicker();
 
         $('.my-colorpicker2').on('colorpickerChange', function(event) {
             $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-        })
+        });
 
+        // Bootstrap Switch
         $("input[data-bootstrap-switch]").each(function() {
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        })
+        });
 
-    })
-    // BS-Stepper Init
-    document.addEventListener('DOMContentLoaded', function() {
-        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
+        // Initialize DataTables after all other scripts
+        $('#example1').DataTable({
+            responsive: true,
+            lengthChange: false,
+            autoWidth: false,
+            buttons: []
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-    // DropzoneJS Demo Code Start
-    Dropzone.autoDiscover = false
-
-    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-    var previewNode = document.querySelector("#template")
-    previewNode.id = ""
-    var previewTemplate = previewNode.parentNode.innerHTML
-    previewNode.parentNode.removeChild(previewNode)
-
-    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/target-url", // Set the url
-        thumbnailWidth: 80,
-        thumbnailHeight: 80,
-        parallelUploads: 20,
-        previewTemplate: previewTemplate,
-        autoQueue: false, // Make sure the files aren't queued until manually added
-        previewsContainer: "#previews", // Define the container to display the previews
-        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-    })
-
-    myDropzone.on("addedfile", function(file) {
-        // Hookup the start button
-        file.previewElement.querySelector(".start").onclick = function() {
-            myDropzone.enqueueFile(file)
-        }
-    })
-
-    // Update the total progress bar
-    myDropzone.on("totaluploadprogress", function(progress) {
-        document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-    })
-
-    myDropzone.on("sending", function(file) {
-        // Show the total progress bar when upload starts
-        document.querySelector("#total-progress").style.opacity = "1"
-        // And disable the start button
-        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-    })
-
-    // Hide the total progress bar when nothing's uploading anymore
-    myDropzone.on("queuecomplete", function(progress) {
-        document.querySelector("#total-progress").style.opacity = "0"
-    })
-
-    // Setup the buttons for all transfers
-    // The "add files" button doesn't need to be setup because the config
-    // `clickable` has already been specified.
-    document.querySelector("#actions .start").onclick = function() {
-        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-    }
-    document.querySelector("#actions .cancel").onclick = function() {
-        myDropzone.removeAllFiles(true)
-    }
-    // DropzoneJS Demo Code End
-</script>
-
-<!-- Page specific script -->
-<script>
-    $(function() {
-        $("#example1")
-            .DataTable({
-                responsive: true,
-                lengthChange: false,
-                autoWidth: false,
-                buttons: [],
-            })
-            .buttons()
-            .container()
-            .appendTo("#example1_wrapper .col-md-6:eq(0)");
-        $("#example2").DataTable({
+        $('#example2').DataTable({
             paging: true,
             lengthChange: false,
             searching: false,
             ordering: true,
             info: true,
             autoWidth: false,
-            responsive: true,
+            responsive: true
         });
     });
 </script>
 
-<!-- Page specific script -->
+<!-- Chart script -->
 @if (isset($totalsm) && isset($totalsk))
     <script>
-        const ctx = document.getElementById("myChart");
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById("myChart");
 
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["Surat Masuk", "Surat Keluar"],
-                datasets: [{
-                    label: "Grafik Surat",
-                    data: [{{ $totalsm }}, {{ $totalsk }}],
-                    fill: false,
-                    borderColor: "rgb(0, 119, 204)",
-                    tension: 0.1,
-                }, ],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
+            // Check if ctx (canvas) exists in DOM
+            if (ctx) {
+                const totalsm = {!! json_encode($totalsm) !!};
+                const totalsk = {!! json_encode($totalsk) !!};
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Surat Masuk', 'Surat Keluar'],
+                        datasets: [{
+                            label: 'Grafik Surat',
+                            data: [totalsm, totalsk],
+                            fill: false,
+                            borderColor: 'rgb(0, 119, 204)',
+                            tension: 0.1
+                        }]
                     },
-                },
-            },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
         });
     </script>
 @endif
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const diteruskanSelect = document.getElementById("diteruskan_select");
-        const lainnyaInput = document.getElementById("lainnya_diteruskan_input");
 
-        diteruskanSelect.addEventListener("change", function() {
-            if (this.value === "lainnya") {
-                lainnyaInput.style.display = "block";
-            } else {
-                lainnyaInput.style.display = "none";
-            }
-        });
-    });
-</script>
+<!-- Additional page specific script -->
 <script>
-    // Memeriksa apakah fungsi validateForm() sudah didefinisikan sebelumnya
-    if (typeof validateForm !== 'function') {
-        function validateForm(formId) {
+    // Event listener for 'diteruskan_select'
+    var diteruskanSelect = document.getElementById("diteruskan_select");
+    var lainnyaInput = document.getElementById("lainnya_diteruskan_input");
+
+    if (diteruskanSelect && lainnyaInput) {
+        diteruskanSelect.addEventListener("change", function() {
+            lainnyaInput.style.display = this.value === "lainnya" ? "block" : "none";
+        });
+    }
+</script>
+
+<!-- Form validation function -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Event listener for form submission
+        var submitButton = document.getElementById('submitFormButton');
+
+        // Check if submitButton is null or not
+        if (!submitButton) {
+            // console.error('Element with ID "submitFormButton" not found.');
+            return; // Exit early if the element is not found
+        }
+
+        submitButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent form submission to validate first
+
+            var formId = 'suratForm'; // Adjust form ID as needed
             var form = document.getElementById(formId);
             var errors = false;
-
             if (formId === 'suratMasuk') {
                 // Validasi Nomor Surat
                 var nomorSurat = form.nomor_surat.value.trim();
@@ -338,7 +284,7 @@
                     document.getElementById('tanggalSuratError').innerText = '';
                 }
 
-                // Validasi Perihal
+                // Validasi Perihal Surat
                 var perihalSurat = form.perihal.value.trim();
                 if (perihalSurat === '') {
                     document.getElementById('perihalSuratError').innerText = 'Form wajib diisi';
@@ -347,7 +293,7 @@
                     document.getElementById('perihalSuratError').innerText = '';
                 }
 
-                // Validasi Keterangan
+                // Validasi Keterangan Surat
                 var keteranganSurat = form.keterangan.value.trim();
                 if (keteranganSurat === '') {
                     document.getElementById('keteranganSuratError').innerText = 'Form wajib diisi';
@@ -356,49 +302,20 @@
                     document.getElementById('keteranganSuratError').innerText = '';
                 }
 
-                // Validasi Lampiran
-                var lampiranSurat = form.lampiran.value.trim();
-                if (lampiranSurat === '') {
-                    document.getElementById('lampiranSuratError').innerText = 'Form wajib diisi';
-                    errors = true;
-                } else {
-                    document.getElementById('lampiranSuratError').innerText = '';
-                }
+                // Validasi Lampiran Surat (jika diperlukan)
+                // var lampiranSurat = form.lampiran.value.trim();
+                // if (lampiranSurat === '') {
+                //     document.getElementById('lampiranSuratError').innerText = 'Form wajib diisi';
+                //     errors = true;
+                // } else {
+                //     document.getElementById('lampiranSuratError').innerText = '';
+                // }
             }
 
+            // Jika tidak ada kesalahan, submit form
             if (!errors) {
                 form.submit();
             }
-        }
-    }
-</script>
-<script>
-    function submitForm() {
-        document.getElementById("deleteForm").submit();
-    }
-</script>
-
-<script>
-    // Hilangkan pesan setelah 5 detik
-    setTimeout(function() {
-        var statusMessage = document.getElementById('statusMessage');
-        if (statusMessage) {
-            statusMessage.remove();
-        }
-
-        var errorMessage = document.getElementById('errorMessage');
-        if (errorMessage) {
-            errorMessage.remove();
-        }
-    }, 5000); // 5000 milidetik = 5 detik
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    flatpickr("#start_date", {
-        dateFormat: "d/m/Y"
-    });
-    flatpickr("#end_date", {
-        dateFormat: "d/m/Y"
+        });
     });
 </script>

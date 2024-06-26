@@ -126,11 +126,11 @@ class TransaksiSuratMasukController extends Controller
 
 
         // Simpan data surat masuk
-        transaksi_surat_masuk::insert($data);
 
+        $dataBerhasilDisimpan = transaksi_surat_masuk::insert($data);
         // Redirect dengan pesan sukses
 
-        $dataBerhasilDisimpan = true; // Ganti dengan logika penyimpanan yang sesuai
+
 
         if ($dataBerhasilDisimpan) {
             return redirect('/surat/sm/index')->with('status', 'Data Berhasil Disimpan');
@@ -192,13 +192,13 @@ class TransaksiSuratMasukController extends Controller
             $data['lampiran'] = $lampiran;
         }
 
-        transaksi_surat_masuk::where('id', $id)->update($data);
+        $updateSuccess = transaksi_surat_masuk::where('id', $id)->update($data);
 
         // Redirect dengan pesan sukses
 
-        $dataBerhasilDisimpan = true; // Ganti dengan logika penyimpanan yang sesuai
 
-        if ($dataBerhasilDisimpan) {
+
+        if ($updateSuccess) {
             return redirect('/surat/sm/index')->with('status', 'Data Berhasil Di Perbarui');
         } else {
             return redirect('/surat/sm/index')->with('error', 'Data Gagal Di Perbarui');

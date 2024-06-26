@@ -24,10 +24,13 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Please enter your username and new password below to reset your account!</p>
 
-                <form action='/login/store' method="post">
+                <form action='/login/update' method="post">
                     @csrf
+                    <div class="col-sm-10">
+                        <input type="text" name="id" class="form-control" id="id" value="{{ Auth::user()->id }}">
+                    </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="name" class="form-control" placeholder="Full Name" value="{{ old('name') }}">
+                        <input type="text" name="username" class="form-control" placeholder="Username" value="">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -35,7 +38,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Username" value="{{ old('username') }}">
+                        <input type="email" name="email" class="form-control" placeholder="Email" value="">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>

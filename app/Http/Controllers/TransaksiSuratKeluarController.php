@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\keterangan;
+use App\Models\keterangan_sub;
 use App\Models\transaksi_index;
 use App\Models\transaksi_surat_keluar;
 use App\Models\transaksi_surat_masuk;
@@ -48,7 +49,58 @@ class TransaksiSuratKeluarController extends Controller
     public function create()
     {
         $data_keterangan = keterangan::all();
-        return view("pages.admin.surat.sk.create", ['data_keterangan' => $data_keterangan]);
+        // HItung jumlah surat database
+        $hitung_surat = transaksi_surat_keluar::count();
+        $new_dates = date_format(now(), 'm-Y');
+        // Nilai default jika tidak ada nomor surat sebelumnya
+        $last_surat = transaksi_surat_keluar::where('tanggal_surat', 'like', '%' . $new_dates . '%')
+            ->orderByDesc('tanggal_surat')
+            ->orderByDesc('id')
+            ->first();
+
+        if ($hitung_surat == 0) {
+            // Jika ada data, ambil nomor urut dari nomor surat terakhir
+            $nomor_surat = 1;
+        } else {
+            if ($last_surat) {
+                $tanggal_bulan_db = $last_surat->tanggal_surat;
+                $new_date = date_create($tanggal_bulan_db); // Menginisialisasi $new_date di sini
+                $fix_date_format = date_format($new_date, 'm-Y');
+
+                $nomor_surat_db = $last_surat->nomor_surat;
+                $explode_nomor_surat = explode("/", $nomor_surat_db);
+
+                $nomor_surat = $explode_nomor_surat[1] + 1;
+            } else {
+                $ceking_db = transaksi_surat_keluar::orderByDesc('tanggal_surat')
+                    ->orderByDesc('id')
+                    ->first();
+                if ($ceking_db) {
+                    $new_date = date_create($ceking_db->tanggal_surat); // Menginisialisasi $new_date di sini
+                    $fix_date_format = date_format($new_date, 'm-Y');
+                }
+
+                $nomor_surat_db = $ceking_db->nomor_surat;
+                $explode_nomor_surat = explode("/", $nomor_surat_db);
+
+                if ($fix_date_format == $new_dates) {
+                    $nomor_surat = $explode_nomor_surat[1] + 1;
+                } else {
+                    $nomor_surat = $explode_nomor_surat[1] + 5;
+                }
+            }
+        }
+        return view("pages.admin.surat.sk.create", [
+            'data_keterangan' => $data_keterangan,
+            'nomor' => $nomor_surat
+        ]);
+    }
+
+    public function create_kategori(Request $request)
+    {
+        $keterangan = $request->keterangan;
+        $sub_keterangan = keterangan_sub::where('keteranga_kode', $keterangan)->get();
+        return response()->json(['data' => $sub_keterangan]);
     }
 
     public function show(Request $request)
@@ -62,9 +114,11 @@ class TransaksiSuratKeluarController extends Controller
     public function store(Request $request)
     {
         // Mendapatkan nomor surat terakhir
+        // dd($request->keterangan);
         $dates = date_create($request->tanggal_surat);
         $new_dates = date_format($dates, 'm-Y');
         $new_date = null; // Deklarasi variabel $new_date di sini
+        $file_lampiran = $request->file('lampiran');
 
         $last_surat = transaksi_surat_keluar::where('tanggal_surat', 'like', '%' . $new_dates . '%')
             ->orderByDesc('tanggal_surat')
@@ -127,17 +181,20 @@ class TransaksiSuratKeluarController extends Controller
                 'tanggal_surat' => 'required',
                 'keterangan' => 'required',
                 'perihal' => 'required',
-                'lampiran' => 'required|file|mimes:doc,docx,pdf,xls,xlsx,ppt|max:2048',
+                // 'lampiran' => 'required|file|mimes:doc,docx,pdf,xls,xlsx,ppt|max:2048',
             ]);
 
-            // Simpan file PDF ke dalam direktori 'public/dokumen/' dengan nama yang unik
-            $file_lampiran = $request->file('lampiran');
-            $rename_file = Str::random(40) . '.' .  $file_lampiran->getClientOriginalExtension();
-            $file_lampiran->move(public_path('dokumen'), $rename_file);
+            if ($file_lampiran) {
+                # code...
+                // Simpan file PDF ke dalam direktori 'public/dokumen/' dengan nama yang unik
 
-            // Mengambil nilai kode dari database berdasarkan keterangan yang dipilih
-            $kode = keterangan::where('keterangan', $request->keterangan)->value('kode');
+                // $rename_file = Str::random(40) . '.' .  $file_lampiran->getClientOriginalExtension();
+                // $file_lampiran->move(public_path('dokumen'), $rename_file);
 
+                // Mengambil nilai kode dari database berdasarkan keterangan yang dipilih
+            }
+            $kode = keterangan_sub::where('keterangan', $request->keterangan)->value('kode');
+            // dd($kode);
             // Memastikan jika tidak ada kode yang ditemukan, maka diatur sebagai string kosong
             $kode = $kode ?? '';
 
@@ -151,16 +208,16 @@ class TransaksiSuratKeluarController extends Controller
                 'tanggal_surat' => $request->tanggal_surat,
                 'keterangan' => $request->keterangan,
                 'perihal' => $request->perihal,
-                'lampiran' => $rename_file,
+                'lampiran' => $rename_file ?? null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
 
             // Simpan data surat keluar
-            transaksi_surat_keluar::insert($data);
+            $dataBerhasilDisimpan =  transaksi_surat_keluar::insert($data);
             // Redirect dengan pesan sukses
 
-            $dataBerhasilDisimpan = true; // Ganti dengan logika penyimpanan yang sesuai
+
 
             if ($dataBerhasilDisimpan) {
                 return redirect('/surat/sk/index')->with('status', 'Data Berhasil Disimpan');
@@ -225,7 +282,7 @@ class TransaksiSuratKeluarController extends Controller
 
             // Hapus file lampiran lama jika ada
             $old_file_path = public_path('dokumen') . '/' . $data->lampiran;
-            if (file_exists($old_file_path)) {
+            if (file_exists($old_file_path) && is_file($old_file_path)) {
                 unlink($old_file_path);
             }
         } else {
@@ -234,16 +291,16 @@ class TransaksiSuratKeluarController extends Controller
         }
 
         // Perbarui data kecuali keterangan
-        $data->update([
+        $dataToUpdate = [
             'tujuan' => $tujuan,
             'tanggal_surat' => $tanggal_surat,
             'keterangan' => $keterangan,
             'perihal' => $perihal,
             'lampiran' => $lampiran, // Perbarui nilai lampiran dengan nilai baru jika ada
-        ]);
+        ];
 
         // Redirect ke halaman index dengan pesan sukses
-        $dataBerhasilDisimpan = true; // Ganti dengan logika penyimpanan yang sesuai
+        $dataBerhasilDisimpan = transaksi_surat_keluar::where('id', $id)->update($dataToUpdate);
 
         if ($dataBerhasilDisimpan) {
             return redirect('/surat/sk/index')->with('status', 'Data Berhasil Di Perbarui');
@@ -251,6 +308,7 @@ class TransaksiSuratKeluarController extends Controller
             return redirect('/surat/sk/index')->with('error', 'Data Gagal Di Perbarui');
         }
     }
+
 
 
     public function destroy(Request $request)
@@ -266,6 +324,33 @@ class TransaksiSuratKeluarController extends Controller
             return redirect('/surat/sk/index')->with('success', 'Data berhasil dihapus');
         } else {
             return redirect('/surat/sk/index')->with('error', 'Data gagal dihapus');
+        }
+    }
+
+    public function upload(Request $request)
+    {
+        $id = $request->id;
+        $detail = transaksi_surat_keluar::where('id', $id)->first();
+        return view('pages.admin.surat.sk.upload_surat', ['data' => $detail]);
+    }
+
+    public function upload_file(Request $request)
+    {
+        $id = $request->id;
+        if ($id) {
+            $validasi = $request->validate([
+                'lampiran' => 'required|file|mimes:doc,docx,pdf,xls,xlsx,ppt|max:2048',
+            ]);
+            // Simpan file PDF ke dalam direktori 'public/dokumen/' dengan nama yang unik
+            $file_lampiran = $request->file('lampiran');
+            $rename_file = Str::random(40) . '.' .  $file_lampiran->getClientOriginalExtension();
+            $file_lampiran->move(public_path('dokumen'), $rename_file);
+
+            $data = transaksi_surat_keluar::find($id);
+            $data->lampiran = $rename_file;
+            $data->update();
+
+            return redirect('/surat/sk/index')->with('status', 'Data Berhasil diUpdate');
         }
     }
 }

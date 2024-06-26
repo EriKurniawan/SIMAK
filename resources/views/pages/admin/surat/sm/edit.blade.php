@@ -106,7 +106,7 @@
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
 
-                                    <a href="surat/sm/index" class="btn btn-danger">Kembali</a>
+                                    <a href="/surat/sm/index" class="btn btn-danger">Kembali</a>
                                 </div>
                             </div>
                         </form>

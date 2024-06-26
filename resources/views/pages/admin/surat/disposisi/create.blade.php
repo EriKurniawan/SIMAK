@@ -83,15 +83,19 @@
                                                 <div class="form-group">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="sifat_sangat_segera" name="sifat_surat" value="Sangat Segera">
-                                                        <label class="form-check-label" for="sifat_sangat_segera">Sangat Segera</label>
+                                                        <label class="form-check-label" for="sifat_sangat_segera">Sangat Rahasia</label>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="sifat_segera" name="sifat_surat" value="Segera">
-                                                        <label class="form-check-label" for="sifat_segera">Segera</label>
+                                                        <label class="form-check-label" for="sifat_segera">Rahasia</label>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="sifat_rahasia" name="sifat_surat" value="Rahasia">
-                                                        <label class="form-check-label" for="sifat_rahasia">Rahasia</label>
+                                                        <label class="form-check-label" for="sifat_rahasia">Penting</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="sifat_rahasia" name="sifat_surat" value="Rahasia">
+                                                        <label class="form-check-label" for="sifat_rahasia">Biasa</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,24 +118,24 @@
                                                         <!-- checkbox -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Sekertaris Dinas</label>
+                                                                <input class="form-check-input" type="checkbox" id="sekertaris_dinas" name="diteruskan" value="Sekertaris Dinas">
+                                                                <label class="form-check-label" for="sifat_sangat_segera">Sekertaris Dinas</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Bidang Informasi & Statistik</label>
+                                                                <input class="form-check-input" type="checkbox" id="bidang_informasi_&_statistik" name="diteruskan" value="Bidang Informasi & Statistik">
+                                                                <label class="form-check-label" for="bidang_informasi_&_statistik">Bidang Informasi & Statistik</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Bidang Media</label>
+                                                                <input class="form-check-input" type="checkbox" id="bidang_aplikasi" name="diteruskan" value="Bidang Media">
+                                                                <label class="form-check-label" for="bidang_aplikasi">Bidang Media</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Bidang Teknologi Komunikasi & Persandian</label>
+                                                                <input class="form-check-input" type="checkbox" id="bidang_teknologi_komunikasi" name="diteruskan" value="Bidang Teknologi Komunikasi & Persandian">
+                                                                <label class="form-check-label" for="bidang_teknologi_komunikasi">Bidang Teknologi Komunikasi & Persandian</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Bidang Aplikasi & Sistem Informaasi</label>
+                                                                <input class="form-check-input" type="checkbox" id="bidang_aplikasi_&_sistem_informasi" name="diteruskan" value="Bidang Aplikasi & Sistem Informaasi">
+                                                                <label class="form-check-label" for="bidang_aplikasi_&_sistem_informasi">Bidang Aplikasi & Sistem Informaasi</label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox">
@@ -152,16 +156,16 @@
                                                         <!-- checkbox -->
                                                         <div class="form-group">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Tanggapan dan saran</label>
+                                                                <input class="form-check-input" type="checkbox" id="tanggapan_dan_saran" name="hormat" value="Tanggapan dan saran">
+                                                                <label class="form-check-label" for="tanggapan_dan_saran">Tanggapan dan saran</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Proses lebih lanjut</label>
+                                                                <input class="form-check-input" type="checkbox"id="proses_lebih_lanjut" name="hormat" value="Proses lebih lanjut">
+                                                                <label class="form-check-label" for="proses_lebih_lanjut">Proses lebih lanjut</label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">Koordinasi/konfirmasikan</label>
+                                                                <input class="form-check-input" type="checkbox" id="koordinasi" name="hormat" value="Koordinasi/konfirmasikan">
+                                                                <label class="form-check-label" for="koordinasi">Koordinasi/konfirmasikan</label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox">

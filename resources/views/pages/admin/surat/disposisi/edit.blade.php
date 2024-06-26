@@ -55,6 +55,10 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
+                                        <input type="text" name="id" class="form-control" id="id" placeholder="" value="{{ $data->id }}">
+
+                                    </div>
+                                    <div class="form-group">
                                         <label for="asal_surat">Asal Surat</label>
                                         <input type="text" class="form-control" id="asal_surat" name="asal_surat" placeholder="" value="{{ $data->asal_surat }}">
                                         @error('asal_surat')
@@ -95,9 +99,7 @@
                                     <div class="form-group">
                                         <label for="nomor_agenda">Nomor Agenda</label>
                                         <input type="text" class="form-control" id="nomor_agenda" name="nomor_agenda" placeholder="" value="{{ $data->nomor_agenda }}">
-                                        @error('nomor_agenda')
-                                            <small>{{ $message }}</small>
-                                        @enderror
+
                                     </div>
                                     <div class="form-group">
                                         <label for="example4">Sifat :</label>
@@ -106,16 +108,20 @@
                                                 <!-- checkbox -->
                                                 <div class="form-group">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="sifat_sangat_segera" name="sifat_surat[]" value="Sangat Segera" {{ in_array('Sangat Segera', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="sifat_sangat_segera">Sangat Segera</label>
+                                                        <input class="form-check-input" type="checkbox" id="sifat_sangat_segera" name="sifat_surat" value="Sangat Rahasia" {{ in_array('Sangat Rahasia', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="sifat_sangat_segera">Sangat Rahasia</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="sifat_segera" name="sifat_surat[]" value="Segera" {{ in_array('Segera', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="sifat_segera">Segera</label>
+                                                        <input class="form-check-input" type="checkbox" id="sifat_segera" name="Rahasia" value="Rahasia" {{ in_array('Rahasia', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="sifat_segera">Rahasia</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="sifat_rahasia" name="sifat_surat[]" value="Rahasia" {{ in_array('Rahasia', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="sifat_rahasia">Rahasia</label>
+                                                        <input class="form-check-input" type="checkbox" id="sifat_rahasia" name="Penting" value="Penting" {{ in_array('Penting', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="sifat_rahasia">Penting</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="Biasa" name="sifat_surat" value="Biasa" {{ in_array('Biasa', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="Biasa">Biasa</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,25 +213,26 @@
                                                         <div class="col-8">
                                                             <!-- checkbox -->
                                                             <div class="form-group">
+
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan[]" value="Sekertaris Dinas" {{ in_array('Sekertaris Dinas', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                                                    <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Sekertaris Dinas" {{ in_array('Sekertaris Dinas', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
                                                                     <label class="form-check-label" for="diteruskan_sekertaris">Sekertaris Dinas</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Informasi & Statistik"{{ in_array('Bidang Informasi & Statistik', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="diteruskan_sekertaris">Bidang Informasi & Statistik</label>
+                                                                    <input class="form-check-input" type="checkbox" id="bidang_informasi" name="diteruskan" value="Bidang Informasi & Statistik"{{ in_array('Bidang Informasi & Statistik', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="bidang_informasi">Bidang Informasi & Statistik</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Media"{{ in_array('Bidang Media', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="diteruskan_sekertaris">Bidang Media</label>
+                                                                    <input class="form-check-input" type="checkbox" id="bidang_media" name="diteruskan" value="Bidang Media"{{ in_array('Bidang Media', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="bidang_media">Bidang Media</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Teknologi Komunikasi & Persandian"{{ in_array('Bidang Teknologi Komunikasi & Persandian', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="diteruskan_sekertaris">Bidang Teknologi Komunikasi & Persandian</label>
+                                                                    <input class="form-check-input" type="checkbox" id="bidang_teknologi" name="diteruskan" value="Bidang Teknologi Komunikasi & Persandian"{{ in_array('Bidang Teknologi Komunikasi & Persandian', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="bidang_teknologi">Bidang Teknologi Komunikasi & Persandian</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Aplikasi & Sistem Informasi"{{ in_array('Bidang Aplikasi & Sistem Informasi', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="diteruskan_sekertaris">Bidang Aplikasi & Sistem Informasi</label>
+                                                                    <input class="form-check-input" type="checkbox" id="bidang_aplikasi" name="diteruskan" value="Bidang Aplikasi & Sistem Informasi"{{ in_array('Bidang Aplikasi & Sistem Informasi', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="bidang_aplikasi">Bidang Aplikasi & Sistem Informasi</label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox">
@@ -250,12 +257,12 @@
                                                                     <label class="form-check-label" for="hormat_tanggapan_dan_saran">Tanggapan dan saran</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="hormat_tanggapan_dan_saran" name="hormat" value="Proses lebih lanjut"{{ in_array('Proses lebih lanjut', explode(',', $data->hormat)) ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="hormat_tanggapan_dan_saran">Proses lebih lanjut</label>
+                                                                    <input class="form-check-input" type="checkbox" id="proses" name="hormat" value="Proses lebih lanjut"{{ in_array('Proses lebih lanjut', explode(',', $data->hormat)) ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="proses">Proses lebih lanjut</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="hormat_tanggapan_dan_saran" name="hormat" value="Koordinasi/konfirmasikan"{{ in_array('Koordinasi/konfirmasikan', explode(',', $data->hormat)) ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="hormat_tanggapan_dan_saran">Koordinasi/konfirmasikan</label>
+                                                                    <input class="form-check-input" type="checkbox" id="koordinasi" name="hormat" value="Koordinasi/konfirmasikan"{{ in_array('Koordinasi/konfirmasikan', explode(',', $data->hormat)) ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="koordinas">Koordinasi/konfirmasikan</label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox">

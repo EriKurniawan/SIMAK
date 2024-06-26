@@ -156,12 +156,13 @@
                 <td class=" txt-center">
                     <img src="/assets/img/logotubaba.jpeg" alt="">
                 </td>
-                <td class=" txt-center">
-                    <h3><b>PEMERINTAHAN KABUPATEN TULANG BAWANG BARAT</b></h3>
-                    <h1><b> SEKERTARIAT DAERAH </b></h1>
-                    <div>Jalan Tuan Rio Sanak, Komplek Perkantoran Pemerintahan Daerah <br>
-                        Kabupaten Tulang Bawang Barat, Panaragan 34593</div>
+                <td class="center" style="text-align: center; padding: 10px;">
+                    <h3 style="margin: 0; font-weight: bold;">PEMERINTAHAN KABUPATEN TULANG BAWANG BARAT</h3>
+                    <h1 style="margin: 0; font-weight: bold;">SEKERTARIAT DAERAH</h1>
+                    <p style="margin-top: 5px; margin-bottom: 0;">Jalan Tuan Rio Sanak, Komplek Perkantoran Pemerintahan Daerah<br>
+                        Kabupaten Tulang Bawang Barat, Panaragan 34593</p>
                 </td>
+
             </tr>
         </table>
 
@@ -176,37 +177,45 @@
         <!-- INI TABEL PERTAMA -->
         <table>
             <tr>
-                <td class="txt-left">
-                    <ul>
-                        <li><b>Asal surat</b>: {{ $data->asal_surat }}</li>
-                        <li><b>No.surat</b>: {{ $data->nomor_surat }}</li>
-                        <li><b>Tgl.surat:</b>: {{ $data->tanggal_surat }}</li>
-                    </ul>
-                </td>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td class="txt-left" style="padding-right: 20px; vertical-align: top;">
+                            <ul style="list-style-type: none; padding-left: 0;">
+                                <li>Asal surat: {{ $data->asal_surat }}</li>
+                                <li>No.surat: {{ $data->nomor_surat }}</li>
+                                <li>Tgl.surat: {{ $data->tanggal_surat }}</li>
+                            </ul>
+                        </td>
+                        <td class="txt-left" style="vertical-align: top;">
+                            <ul style="list-style-type: none; padding-left: 0;">
+                                <li>Diterima Tanggal: {{ $data->tanggal_diterima }}</li>
+                                <li>No.Agenda: {{ $data->nomor_agenda }}</li>
+                                <li>Sifat:
+                                    <div class="checkbox-container">
+                                        <label>
+                                            <input type="checkbox" name="option1" value="1" {{ in_array('Sangat Rahasia', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                            Sangat Rahasia
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="option2" value="2" {{ in_array('Rahasia', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                            Rahasia
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="option3" value="3" {{ in_array('Penting', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                            Penting
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="option4" value="3" {{ in_array('Biasa', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
+                                            Biasa
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
 
 
-
-                <td class="txt-left">
-                    Diterima Tanggal : {{ $data->tanggal_diterima }}<br>
-                    No.Agenda : {{ $data->nomor_agenda }}<br>
-                    Sifat :
-                    <form>
-                        <div class="checkbox-container">
-                            <label>
-                                <input type="checkbox" name="option1" value="1" {{ in_array('Sangat Segera', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
-                                Sangat Segera
-                            </label>
-                            <label>
-                                <input type="checkbox" name="option2" value="2" {{ in_array('Segera', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
-                                Segera
-                            </label>
-                            <label>
-                                <input type="checkbox" name="option3" value="3" {{ in_array('Rahasia', explode(',', $data->sifat_surat)) ? 'checked' : '' }}>
-                                Rahasia
-                            </label>
-                        </div>
-                    </form>
-                </td>
             </tr>
         </table>
 
@@ -214,7 +223,7 @@
         <table>
             <tr>
                 <td class="txt-left">
-                    <br><br> Hal<br><br><br>
+                    <br><br> Perihal<br><br><br>
                 </td>
                 <td class="txt-left">
                     : {{ $data->perihal }}
@@ -224,66 +233,69 @@
 
 
         <!-- TABEL KETIGA -->
-        <table>
-            <tr>
-                <td class="txt-left">
-                    Diteruskan kepada sdr: <br>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Sekertaris Dinas" {{ in_array('Sekertaris Dinas', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Sekertaris Dinas</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Informasi & Statistik"{{ in_array('Bidang Informasi & Statistik', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Bidang Informasi & Statistik</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Media"{{ in_array('Bidang Media', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Bidang Media</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Teknologi Komunikasi & Persandian"{{ in_array('Bidang Teknologi Komunikasi & Persandian', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Bidang Teknologi Komunikasi & Persandian</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="Bidang Aplikasi & Sistem Informasi"{{ in_array('Bidang Aplikasi & Sistem Informasi', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Bidang Aplikasi & Sistem Informaasi</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label">..............................................................................</label>
-                        </div>
-                </td>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-6">Diteruskan kepada sdr: <br>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="diteruskan_sekertaris" name="diteruskan" value="1" {{ in_array('Sekertaris Dinas', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="diteruskan_sekertaris">Sekertaris Dinas</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="bidang_informasi" name="diteruskan" value="2"{{ in_array('Bidang Informasi & Statistik', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="bidang_informasi">Bidang Informasi & Statistik</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="bidang_media" name="diteruskan" value="3"{{ in_array('Bidang Media', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="bidang_media">Bidang Media</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="bidang_teknologi" name="diteruskan" value="4"{{ in_array('Bidang Teknologi Komunikasi & Persandian', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="bidang_teknologi">Bidang Teknologi Komunikasi & Persandian</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="bidang_aplikasi" name="diteruskan" value="5"{{ in_array('Bidang Aplikasi & Sistem Informasi', explode(',', $data->diteruskan)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="bidang_aplikasi">Bidang Aplikasi & Sistem Informasi</label>
+                            </div>
 
-                <td class="txt-left">
-                    Dengan Hormat Harap: <br>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="hormat_tanggapan_dan_saran" name="hormat" value="Tanggapan dan saran"{{ in_array('Tanggapan dan saran', explode(',', $data->hormat)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Tanggapan dan saran</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">..............................................................................</label>
+                            </div>
+
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="hormat_tanggapan_dan_saran" name="hormat" value="Proses lebih lanjut"{{ in_array('Proses lebih lanjut', explode(',', $data->hormat)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Proses lebih lanjut</label>
+                    </td>
+                    <td class="col-md-6">Dengan Hormat Harap: <br>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="hormat_tanggapan_dan_saran" name="hormat" value="1"{{ in_array('Tanggapan dan saran', explode(',', $data->hormat)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="hormat_tanggapan_dan_saran">Tanggapan dan saran</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="proses" name="hormat" value="2"{{ in_array('Proses lebih lanjut', explode(',', $data->hormat)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="proses">Proses lebih lanjut</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="koordinasi" name="hormat" value="3"{{ in_array('Koordinasi/konfirmasikan', explode(',', $data->hormat)) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="koordinasi">Koordinasi/konfirmasikan</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">..............................................................................</label>
+                            </div>
+
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="hormat_tanggapan_dan_saran" name="hormat" value="Koordinasi/konfirmasikan"{{ in_array('Koordinasi/konfirmasikan', explode(',', $data->hormat)) ? 'checked' : '' }}>
-                            <label class="form-check-label">Koordinasi/konfirmasikan</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label">............................................</label>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
         <!-- BAGIAN CATATAN DAN TTD -->
         <br>
         <p class="txt-left">Catatan : {{ $data->catatan }}</p>
         <br><br><br><br><br><br>
-        <p class="txt-right"> {{ Auth::user()->name }}, <br> (paraf dan tanggal) <br> .................................</p>
+        <p class="txt-right"> Sekretaris Dinas, <br> (paraf dan tanggal) <br> .................................</p>
     </section>
 </body>
 
